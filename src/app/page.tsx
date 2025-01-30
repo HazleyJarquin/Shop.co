@@ -1,5 +1,111 @@
 import { BrandsCarousel } from "@/components/BrandsCarousel";
+import { BrowseDressStyle } from "@/components/BrowseDressStyle";
 import { HeaderContent } from "@/components/HeaderContent";
+import { ProductsCarousel } from "@/components/ProductsCarousel";
+
+interface Product {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  originalPrice?: number;
+  rating: number;
+  href: string;
+}
+
+const PRODUCTS: Product[] = [
+  {
+    id: "1",
+    name: "T-Shirt Tape",
+    image: "/clothe/TShirtTape.png",
+    price: 120,
+    href: "/product/1",
+    rating: 4.5,
+  },
+  {
+    id: "2",
+    name: "Skinny Fit Jeans",
+    image: "/clothe/SkinnyFitJeans.png",
+    price: 240,
+    originalPrice: 260,
+    href: "/product/2",
+    rating: 4.5,
+  },
+  {
+    id: "3",
+    name: "Checkered Shirt",
+    image: "/clothe/CheckeredShirt.png",
+    price: 180,
+    href: "/product/3",
+    rating: 4,
+  },
+  {
+    id: "4",
+    name: "Sleeve Striped TShirt",
+    image: "/clothe/SleeveStripedTShirt.png",
+    price: 130,
+    originalPrice: 160,
+    href: "/product/4",
+    rating: 4.5,
+  },
+];
+const TOPSELLING: Product[] = [
+  {
+    id: "1",
+    name: "Vertical Striped Shirt",
+    image: "/clothe/VerticalStripedShirt.png",
+    price: 212,
+    originalPrice: 232,
+    href: "/product/1",
+    rating: 5.0,
+  },
+  {
+    id: "2",
+    name: "Courage Graphic T-shirt",
+    image: "/clothe/CourageGraphicTShirt.png",
+    price: 145,
+    href: "/product/2",
+    rating: 4.0,
+  },
+  {
+    id: "3",
+    name: "Loose Fit Bermuda Shorts",
+    image: "/clothe/LooseFitBermudaShorts.png",
+    price: 80,
+    href: "/product/3",
+    rating: 3.0,
+  },
+  {
+    id: "4",
+    name: "Faded Skinny Jeans",
+    image: "/clothe/FadedSkinnyJeans.png",
+    price: 210,
+    href: "/product/4",
+    rating: 4.5,
+  },
+];
+
+export const metadata = {
+  title: "Shop.co - Tienda de Moda y Estilo",
+  description:
+    "Compra las mejores prendas y accesorios en Shop.co. Descubre ropa de alta calidad de las mejores marcas.",
+  keywords: "ropa, moda, tienda online, shop.co, ecommerce, tendencias de moda",
+  robots: "index, follow",
+  openGraph: {
+    title: "Shop.co - Tienda de Moda y Estilo",
+    description:
+      "Encuentra las últimas tendencias de moda en Shop.co. Compra ropa y accesorios para todos los estilos.",
+    url: "https://shop.co",
+    images: [
+      {
+        url: "https://shop.co/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Imagen destacada de Shop.co",
+      },
+    ],
+  },
+};
 
 export default function Home() {
   return (
@@ -14,6 +120,10 @@ export default function Home() {
           "/images/CalvinKlein.png",
         ]}
       />
+      <ProductsCarousel title="New Arrivals" products={PRODUCTS} />
+      <div className="border-b-2 border-gray-200 mx-auto px-20 w-full max-w-screen-xl" />
+      <ProductsCarousel title="Top Selling" products={TOPSELLING} />
+      <BrowseDressStyle />
     </div>
   );
 }

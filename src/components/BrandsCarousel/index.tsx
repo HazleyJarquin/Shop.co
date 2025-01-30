@@ -38,7 +38,7 @@ export const BrandsCarousel = ({ brands }: Props) => {
                   width={200}
                   height={80}
                   priority
-                  className="h-8 object-contain brightness-0 invert"
+                  className="h-4 md:h-8 object-contain brightness-0 invert"
                 />
               </div>
             </CarouselItem>
