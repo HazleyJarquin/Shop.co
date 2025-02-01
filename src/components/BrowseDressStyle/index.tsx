@@ -27,7 +27,7 @@ export const BrowseDressStyle = ({
         className
       )}
     >
-      <div className="container mx-auto w-full md:w-[50%] h-full flex flex-col">
+      <div className="container mx-auto w-full lg:w-[50%] h-full flex flex-col">
         <h2 className="text-3xl font-bold text-center mb-8 uppercase">
           {title}
         </h2>

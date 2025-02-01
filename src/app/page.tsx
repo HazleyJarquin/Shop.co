@@ -1,5 +1,7 @@
 import { BrandsCarousel } from "@/components/BrandsCarousel";
 import { BrowseDressStyle } from "@/components/BrowseDressStyle";
+import { Divider } from "@/components/Divider";
+import { HappyCustomers } from "@/components/HappyCustomer";
 import { HeaderContent } from "@/components/HeaderContent";
 import { ProductsCarousel } from "@/components/ProductsCarousel";
 
@@ -121,9 +123,10 @@ export default function Home() {
         ]}
       />
       <ProductsCarousel title="New Arrivals" products={PRODUCTS} />
-      <div className="border-b-2 border-gray-200 mx-auto px-20 w-full max-w-screen-xl" />
+      <Divider />
       <ProductsCarousel title="Top Selling" products={TOPSELLING} />
       <BrowseDressStyle />
+      <HappyCustomers />
     </div>
   );
 }

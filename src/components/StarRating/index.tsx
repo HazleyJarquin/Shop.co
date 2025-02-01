@@ -2,9 +2,10 @@ import { Star, StarHalf } from "lucide-react";
 
 interface Props {
   rating: number;
+  showNumber?: boolean;
 }
 
-export const StarRating = ({ rating }: Props) => {
+export const StarRating = ({ rating, showNumber = true }: Props) => {
   const clampedRating = Math.max(0, Math.min(5, rating));
 
   const roundedRating = Math.round(clampedRating * 2) / 2;
@@ -33,7 +34,9 @@ export const StarRating = ({ rating }: Props) => {
           return <Star key={index} className="w-6 h-6 text-gray-300" />;
         }
       })}
-      <span className="ml-2 text-gray-600">{clampedRating.toFixed(1)}/5</span>
+      {showNumber && (
+        <span className="ml-2 text-gray-600">{clampedRating.toFixed(1)}/5</span>
+      )}
     </div>
   );
 };

@@ -14,6 +14,7 @@ export default {
         lightGray: "#F0F0F0",
         starColor: "#FFC633",
         vividRed: "#FF3333",
+        esmeraldGreen: "#01AB31",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
