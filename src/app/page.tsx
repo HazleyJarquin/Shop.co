@@ -3,6 +3,7 @@ import { BrowseDressStyle } from "@/components/BrowseDressStyle";
 import { Divider } from "@/components/Divider";
 import { HappyCustomers } from "@/components/HappyCustomer";
 import { HeaderContent } from "@/components/HeaderContent";
+import { NewArrivalsProducts } from "@/components/NewArrivalsProducts";
 import { ProductsCarousel } from "@/components/ProductsCarousel";
 
 interface Product {
@@ -15,42 +16,6 @@ interface Product {
   href: string;
 }
 
-const PRODUCTS: Product[] = [
-  {
-    id: "1",
-    name: "T-Shirt Tape",
-    image: "/clothe/TShirtTape.png",
-    price: 120,
-    href: "/product/1",
-    rating: 4.5,
-  },
-  {
-    id: "2",
-    name: "Skinny Fit Jeans",
-    image: "/clothe/SkinnyFitJeans.png",
-    price: 240,
-    originalPrice: 260,
-    href: "/product/2",
-    rating: 4.5,
-  },
-  {
-    id: "3",
-    name: "Checkered Shirt",
-    image: "/clothe/CheckeredShirt.png",
-    price: 180,
-    href: "/product/3",
-    rating: 4,
-  },
-  {
-    id: "4",
-    name: "Sleeve Striped TShirt",
-    image: "/clothe/SleeveStripedTShirt.png",
-    price: 130,
-    originalPrice: 160,
-    href: "/product/4",
-    rating: 4.5,
-  },
-];
 const TOPSELLING: Product[] = [
   {
     id: "1",
@@ -109,7 +74,15 @@ export const metadata = {
   },
 };
 
-export default function Home() {
+const getProducts = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
+    next: { revalidate: 60 },
+  });
+  return res.json();
+};
+
+export default async function Home() {
+  const productsData = await getProducts();
   return (
     <div className="w-full h-[100%] flex flex-col">
       <HeaderContent />
@@ -122,7 +95,7 @@ export default function Home() {
           "/images/CalvinKlein.png",
         ]}
       />
-      <ProductsCarousel title="New Arrivals" products={PRODUCTS} />
+      <NewArrivalsProducts productsData={productsData} />
       <Divider />
       <ProductsCarousel title="Top Selling" products={TOPSELLING} />
       <BrowseDressStyle />

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { Statistics } from "../Statistics";
 import { productStatistics } from "@/utils/header/productStatistics";
+import Link from "next/link";
 
 export const HeaderContent = () => {
   return (
@@ -16,7 +17,9 @@ export const HeaderContent = () => {
           style.
         </p>
 
-        <Button className="py-6 w-full md:w-36 rounded-full">Shop now</Button>
+        <Link href="/products">
+          <Button className="py-6 w-full md:w-36 rounded-full">Shop now</Button>
+        </Link>
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {productStatistics.map((product, index) => (
             <div

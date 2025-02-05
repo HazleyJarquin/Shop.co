@@ -1,8 +1,8 @@
 export const linksNavigations = [
   {
     id: 1,
-    title: "Shop",
-    path: "/shop",
+    title: "Products",
+    path: "/products",
   },
   {
     id: 2,

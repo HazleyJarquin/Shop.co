@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { OpinionCard } from "../OpinionCard";
 import {
