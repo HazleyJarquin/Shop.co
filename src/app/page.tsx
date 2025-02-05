@@ -5,6 +5,7 @@ import { HappyCustomers } from "@/components/HappyCustomer";
 import { HeaderContent } from "@/components/HeaderContent";
 import { NewArrivalsProducts } from "@/components/NewArrivalsProducts";
 import { ProductsCarousel } from "@/components/ProductsCarousel";
+import { BASE_URL } from "@/lib/constants";
 
 interface Product {
   id: string;
@@ -73,13 +74,11 @@ export const metadata = {
     ],
   },
 };
-const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL ||
-  (process.env.VERCEL_ENV === "production"
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000");
 
 const getProducts = async () => {
+  if (!BASE_URL) {
+    return null;
+  }
   const res = await fetch(`${BASE_URL}/api/products`, {
     next: { revalidate: 60 },
   });
@@ -87,6 +86,9 @@ const getProducts = async () => {
 };
 
 export default async function Home() {
+  if (!BASE_URL) {
+    return null;
+  }
   const productsData = await getProducts();
 
   return (

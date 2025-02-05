@@ -1,4 +1,5 @@
 import { ProductsDetailInfo } from "@/components/ProductDetailInfo";
+import { BASE_URL } from "@/lib/constants";
 import { Metadata } from "next";
 
 interface Props {
@@ -7,13 +8,13 @@ interface Props {
   }>;
 }
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL ||
-  (process.env.VERCEL_ENV === "production"
-    ? `https://${process.env.VERCEL_URL}`
-    : "http://localhost:3000");
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  if (!BASE_URL) {
+    return {
+      title: "Producto no encontrado",
+      description: "Este producto no existe o fue eliminado.",
+    };
+  }
   const id = (await params).id;
   const res = await fetch(`${BASE_URL}/api/products/${id}`, {
     cache: "no-store",
@@ -36,6 +37,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 // Generación de páginas estáticas
 export async function generateStaticParams() {
+  if (!BASE_URL) {
+    return [];
+  }
   const res = await fetch(`${BASE_URL}/api/products`, {
     next: { revalidate: 60 },
   });
@@ -54,6 +58,9 @@ export async function generateStaticParams() {
 export const dynamicParams = true;
 
 const fetchProductById = async (id: string) => {
+  if (!BASE_URL) {
+    return null;
+  }
   const res = await fetch(`${BASE_URL}/api/products/${id}`, {
     next: { revalidate: 60, tags: ["productsbyid"] },
   });
@@ -66,6 +73,9 @@ const fetchProductById = async (id: string) => {
 };
 
 export default async function ProductsDetailPage({ params }: Props) {
+  if (!BASE_URL) {
+    return null;
+  }
   const id = (await params).id;
   const product = await fetchProductById(id);
 
