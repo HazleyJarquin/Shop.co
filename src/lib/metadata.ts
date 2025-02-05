@@ -3,10 +3,9 @@ import { Metadata } from "next";
 export async function generateMetadata(params: {
   id: string;
 }): Promise<Metadata> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${params.id}`,
-    { cache: "no-store" }
-  );
+  const res = await fetch(`${process.env.BASE_URL}/api/products/${params.id}`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     return {

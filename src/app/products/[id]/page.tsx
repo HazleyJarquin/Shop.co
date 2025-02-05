@@ -9,10 +9,9 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const id = (await params).id;
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${id}`,
-    { cache: "no-store" }
-  );
+  const res = await fetch(`${process.env.NEXT_BASE_URL}/api/products/${id}`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     return {
@@ -31,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 // Generación de páginas estáticas
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
+  const res = await fetch(`${process.env.BASE_URL}/api/products`, {
     next: { revalidate: 60 },
   });
 
@@ -49,12 +48,9 @@ export async function generateStaticParams() {
 export const dynamicParams = true;
 
 const fetchProductById = async (id: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${id}`,
-    {
-      next: { revalidate: 60, tags: ["productsbyid"] },
-    }
-  );
+  const res = await fetch(`${process.env.BASE_URL}/api/products/${id}`, {
+    next: { revalidate: 60, tags: ["productsbyid"] },
+  });
 
   if (!res.ok) {
     throw new Error("Error fetching product");

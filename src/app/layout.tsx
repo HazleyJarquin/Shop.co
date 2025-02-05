@@ -3,7 +3,6 @@ import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import Providers from "@/components/Providers";
 
 const sourceSans3 = Source_Sans_3({
   weight: ["400"],
@@ -23,11 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${sourceSans3.className}  antialiased bg-pastelPink`}>
-        <Providers>
-          <Navbar />
-          <div className="pt-16">{children}</div>
-          <Footer />
-        </Providers>
+        <Navbar />
+        <div className="pt-16">{children}</div>
+        <Footer />
       </body>
     </html>
   );

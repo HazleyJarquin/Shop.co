@@ -75,7 +75,7 @@ export const metadata = {
 };
 
 const getProducts = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
+  const res = await fetch(`${process.env.BASE_URL}/api/products`, {
     next: { revalidate: 60 },
   });
   return res.json();
