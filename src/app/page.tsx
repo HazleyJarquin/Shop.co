@@ -73,9 +73,14 @@ export const metadata = {
     ],
   },
 };
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL ||
+  (process.env.VERCEL_ENV === "production"
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000");
 
 const getProducts = async () => {
-  const res = await fetch(`${process.env.BASE_URL}/api/products`, {
+  const res = await fetch(`${BASE_URL}/api/products`, {
     next: { revalidate: 60 },
   });
   return res.json();
@@ -83,6 +88,7 @@ const getProducts = async () => {
 
 export default async function Home() {
   const productsData = await getProducts();
+
   return (
     <div className="w-full h-[100%] flex flex-col">
       <HeaderContent />
