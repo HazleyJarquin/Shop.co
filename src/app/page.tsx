@@ -90,6 +90,7 @@ export default async function Home() {
     return null;
   }
   const productsData = await getProducts();
+  console.log("PRODUCTS ------------->", productsData);
 
   return (
     <div className="w-full h-[100%] flex flex-col">
@@ -105,7 +106,11 @@ export default async function Home() {
       />
       <NewArrivalsProducts productsData={productsData} />
       <Divider />
-      <ProductsCarousel title="Top Selling" products={TOPSELLING} />
+      <ProductsCarousel
+        notFoundMessage="No top selling products found"
+        title="Top Selling"
+        products={TOPSELLING}
+      />
       <BrowseDressStyle />
       <HappyCustomers />
     </div>

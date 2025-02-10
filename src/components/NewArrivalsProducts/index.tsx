@@ -24,8 +24,13 @@ export const NewArrivalsProducts = ({ productsData }: Props) => {
     };
   });
   return (
-    <div className="w-full h-auto md:h-[100vh]">
+    <div
+      className={`w-full h-auto md:${
+        !products.length ? "h-auto" : "h-[100vh]"
+      }`}
+    >
       <ProductsCarousel
+        notFoundMessage="No new products found for today, but you can see all our products clicking the button below."
         title="New Arrivals"
         products={products?.slice(0, 4) ?? []}
       />
